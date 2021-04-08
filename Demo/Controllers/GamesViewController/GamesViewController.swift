@@ -20,13 +20,25 @@ class GamesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        gamesCollectionView.register(GameCollectionViewCell.self, forCellWithReuseIdentifier: "GameCollectionViewCell")
         gamesCollectionView.dataSource = self
         gamesCollectionView.delegate = self
+        self.searchBar.delegate = self
         viewModel.ready()
         setupViewModel()
         
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.scrollDirection = .horizontal
+            }
+        } else {
+            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.scrollDirection = .vertical
+            }
+        }
     }
     
     private func setupViewModel() {
@@ -59,17 +71,19 @@ extension GamesViewController: UICollectionViewDataSource {
         
         guard let data = data else { return UICollectionViewCell() }
         let cell: GameCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionViewCell", for: indexPath) as! GameCollectionViewCell
-//        @IBOutlet weak var containerView: UIView!
-//        @IBOutlet weak var gameImageView: UIImageView!
-//        @IBOutlet weak var gameTitleLabel: UILabel!
-//        @IBOutlet weak var metaCriticsLabel: UILabel!
-//        @IBOutlet weak var genreLabel: UILabel!
+        //        @IBOutlet weak var containerView: UIView!
         cell.gameTitleLabel.text = data[indexPath.item].name
+        cell.metaCriticsLabel.text = "\(data[indexPath.item].metacritic ?? 0)"
         if let url: URL = URL(string: data[indexPath.item].backgroundImage ?? "") {
             cell.gameImageView.loadImageWithUrl(url)
         }
         
-//        cell.genreLabel.text  = data[indexPath.item].genres.names.map{String($0)}).joined(separator: ",")
+        
+        
+        if let genres = data[indexPath.item].genres {
+            cell.genreLabel.text = genres.map { ($0.name ?? "") }.joined(separator: ", ")
+        }
+        
         return cell
         
     }
@@ -88,18 +102,37 @@ extension GamesViewController: UICollectionViewDelegate {
 
 extension GamesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width - 20, height: 136)
+        let orientation = UIApplication.shared.statusBarOrientation
+        if orientation == .landscapeLeft {
+            return CGSize(width: collectionView.frame.width / 2, height: 136)
+        }
+        return CGSize(width: collectionView.frame.width, height: 136)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
 }
 
-extension GamesViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        viewModel.didChangeQuery(searchController.searchBar.text ?? "")
+extension GamesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            viewModel.filterGames("")
+        } else {
+            viewModel.filterGames(searchBar.text ?? "")
+        }
+        
     }
+    
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        viewModel.filterGames("")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.resignFirstResponder()
+     }
+    
+    
 }

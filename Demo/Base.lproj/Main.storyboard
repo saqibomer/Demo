@@ -20,7 +20,7 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search for games" translatesAutoresizingMaskIntoConstraints="NO" id="NqB-MK-95Z">
                                 <rect key="frame" x="20" y="140" width="374" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Ux-Hs-vV2">
                                 <rect key="frame" x="0.0" y="201" width="414" height="612"/>

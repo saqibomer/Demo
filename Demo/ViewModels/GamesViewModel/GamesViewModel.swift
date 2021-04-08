@@ -10,14 +10,23 @@ import Foundation
 final class GamesViewModel {
     // Outputs
     var isRefreshing: ((Bool) -> Void)?
+    var isSearching: ((Bool) -> Void)?
     var didSelecteGame: ((Int) -> Void)?
     var didFetchGames: (([Results]) -> Void)?
+    
     
     private(set) var games: [Results] = [Results]() {
         didSet {
             didFetchGames?(self.games)
         }
     }
+    
+    private(set) var filteredGames: [Results] = [Results]() {
+        didSet {
+            didFetchGames?(self.filteredGames)
+        }
+    }
+    
     private var currentSearchNetworkTask: URLSessionDataTask?
     private var lastQuery: String?
     private var currentPage = 1
@@ -35,16 +44,10 @@ final class GamesViewModel {
         
         networkingService.fetchGames(withQuery: "?page_size=\(pageSize)&page=\(currentPage)") { [weak self] games in
             guard let strongSelf  = self else { return }
-            strongSelf.finishSearching(with: games?.results ?? [])
+            strongSelf.finishFetching(with: games?.results ?? [])
         }
     }
     
-    func didChangeQuery(_ query: String) {
-        guard query.count > 2,
-              query != lastQuery else { return } // distinct until changed
-        lastQuery = query
-        
-    }
     
     func didSelectRow(at indexPath: IndexPath) {
         if games.isEmpty { return }
@@ -52,6 +55,17 @@ final class GamesViewModel {
             return
         }
         didSelecteGame?(id)
+    }
+    
+    func filterGames(_ searchString: String) {
+        isRefreshing?(true)
+        self.filteredGames = self.games.filter({($0.name?.contains(searchString) ?? true)})
+        if searchString != "" {
+            didFetchGames?(self.filteredGames)
+        } else {
+            didFetchGames?(self.games)
+        }
+        
     }
     
     // Private
@@ -62,12 +76,14 @@ final class GamesViewModel {
         
         currentSearchNetworkTask = networkingService.fetchGames(withQuery: query) { [weak self] games in
             guard let strongSelf  = self else { return }
-            strongSelf.finishSearching(with: games?.results ?? [])
+            strongSelf.finishFetching(with: games?.results ?? [])
         }
     }
     
-    private func finishSearching(with games: [Results]) {
+    private func finishFetching(with games: [Results]) {
         isRefreshing?(false)
         self.games = games
     }
+    
+    
 }
