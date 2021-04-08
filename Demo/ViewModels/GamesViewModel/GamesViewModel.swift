@@ -10,9 +10,11 @@ import Foundation
 final class GamesViewModel {
     // Outputs
     var isRefreshing: ((Bool) -> Void)?
-    var isSearching: ((Bool) -> Void)?
     var didSelecteGame: ((Int) -> Void)?
     var didFetchGames: (([Results]) -> Void)?
+    var didFetchGameDetails: ((Results) -> Void)?
+    var didUpdateFavourite: (([Results]) -> Void)?
+    var didUpdateViewedGames: (([Int]) -> Void)?
     
     
     private(set) var games: [Results] = [Results]() {
@@ -21,11 +23,12 @@ final class GamesViewModel {
         }
     }
     
-    private(set) var filteredGames: [Results] = [Results]() {
-        didSet {
-            didFetchGames?(self.filteredGames)
-        }
-    }
+    
+    /*
+     MARK: fetchedGames to retain fetched results when user cancells search fetchedGames will be used
+     */
+    private(set) var fetchedGames: [Results] = [Results]()
+    
     
     private var currentSearchNetworkTask: URLSessionDataTask?
     private var lastQuery: String?
@@ -44,6 +47,7 @@ final class GamesViewModel {
         
         networkingService.fetchGames(withQuery: "?page_size=\(pageSize)&page=\(currentPage)") { [weak self] games in
             guard let strongSelf  = self else { return }
+            strongSelf.fetchedGames = games?.results ?? []
             strongSelf.finishFetching(with: games?.results ?? [])
         }
     }
@@ -57,13 +61,121 @@ final class GamesViewModel {
         didSelecteGame?(id)
     }
     
-    func filterGames(_ searchString: String) {
+    func searchGames(_ searchString: String) {
         isRefreshing?(true)
-        self.filteredGames = self.games.filter({($0.name?.contains(searchString) ?? true)})
-        if searchString != "" {
-            didFetchGames?(self.filteredGames)
+        if searchString != "" && searchString.count > 3 {
+            startSearchWithQuery(searchString)
+            
         } else {
-            didFetchGames?(self.games)
+            isRefreshing?(false)
+            didFetchGames?(self.fetchedGames)
+        }
+        
+    }
+    
+    func fetchGameDetails(_ id: Int) {
+        isRefreshing?(true)
+        currentSearchNetworkTask = networkingService.fetchGameDetails(withId: id) { [weak self] details in
+            guard let strongSelf  = self else { return }
+            strongSelf.isRefreshing?(false)
+            guard let gameDetails  = details else { return }
+            strongSelf.didFetchGameDetails?(gameDetails)
+        }
+        
+    }
+    /*
+     Favorite Utillity functions
+     */
+    func getFavoriteGames() {
+        
+        if let savedGames = UserDefaults.standard.object(forKey: UserDefaultsKeys.favorite) as? Data {
+            let decoder = JSONDecoder()
+            if let favorites = try? decoder.decode([Results].self, from: savedGames) {
+                self.didUpdateFavourite?(favorites)
+            } else {
+                self.didUpdateFavourite?([])
+            }
+        } else {
+            self.didUpdateFavourite?([])
+        }
+        
+    }
+    
+    func addToFavoriteGames(game: Results) {
+        
+        if let savedGames = UserDefaults.standard.object(forKey: UserDefaultsKeys.favorite) as? Data {
+            let decoder = JSONDecoder()
+            if var favorites = try? decoder.decode([Results].self, from: savedGames) {
+                let alreadyExists = favorites.filter({$0.id == game.id})
+                if alreadyExists.count <= 0 {
+                    favorites.append(game)
+                    let encoder = JSONEncoder()
+                    if let encoded = try? encoder.encode(favorites) {
+                        UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
+                        self.didUpdateFavourite?(favorites)
+                    }
+                }
+            } else {
+                self.didUpdateFavourite?([])
+            }
+        } else {
+            let encoder = JSONEncoder()
+            let favorites = [game]
+            if let encoded = try? encoder.encode(favorites) {
+                UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
+                self.didUpdateFavourite?(favorites)
+            } else {
+                self.didUpdateFavourite?([])
+            }
+            
+        }
+       
+        
+        
+    }
+    
+    func removeFavoriteGames(id: Int) {
+        
+        if let savedGames = UserDefaults.standard.object(forKey: UserDefaultsKeys.favorite) as? Data {
+            let decoder = JSONDecoder()
+            if let favorites = try? decoder.decode([Results].self, from: savedGames) {
+                let filtered = favorites.filter({$0.id != id})
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(filtered) {
+                    UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
+                    self.didUpdateFavourite?(filtered)
+                }
+            }
+        }
+        
+        
+    }
+    
+    /*
+     Viewed Utillity functions
+     */
+    func getViewedGames() {
+        
+        guard let viewed = UserDefaults.standard.array(forKey: UserDefaultsKeys.viewed) as? [Int] else {
+            self.didUpdateViewedGames?([])
+            return
+        }
+        self.didUpdateViewedGames?(viewed)
+        
+    }
+    
+    func addToViewedGames(id: Int) {
+        
+        guard var viewed = UserDefaults.standard.array(forKey: UserDefaultsKeys.viewed) as? [Int] else {
+            let items = [id]
+            UserDefaults.standard.setValue(items, forKey: UserDefaultsKeys.viewed)
+            self.didUpdateViewedGames?(items)
+            return
+        }
+        if !viewed.contains(id) {
+            viewed.append(id)
+            self.didUpdateViewedGames?(viewed)
+            UserDefaults.standard.setValue(viewed, forKey: UserDefaultsKeys.viewed)
         }
         
     }
@@ -74,7 +186,8 @@ final class GamesViewModel {
         
         isRefreshing?(true)
         
-        currentSearchNetworkTask = networkingService.fetchGames(withQuery: query) { [weak self] games in
+        
+        currentSearchNetworkTask = networkingService.fetchGames(withQuery: "?page_size=\(pageSize)&page=\(currentPage)&search=\(query)") { [weak self] games in
             guard let strongSelf  = self else { return }
             strongSelf.finishFetching(with: games?.results ?? [])
         }
@@ -84,6 +197,8 @@ final class GamesViewModel {
         isRefreshing?(false)
         self.games = games
     }
+    
+    
     
     
 }

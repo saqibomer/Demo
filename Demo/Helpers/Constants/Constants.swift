@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum UserDefaultsKeys {
+    static let favorite = "favorite"
+    static let viewed   = "viewed"
+}
+
 enum NetworkConstants {
     enum Endpoints {
         static let games = "games"

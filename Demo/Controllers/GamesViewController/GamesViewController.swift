@@ -12,9 +12,11 @@ class GamesViewController: UIViewController {
     // Properties
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var gamesCollectionView: UICollectionView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     let viewModel = GamesViewModel(networkingService: NetworkClient())
     private var data: [Results]?
+    private var viewedGames: [Int] = []
     
     
     
@@ -23,8 +25,16 @@ class GamesViewController: UIViewController {
         gamesCollectionView.dataSource = self
         gamesCollectionView.delegate = self
         self.searchBar.delegate = self
-        viewModel.ready()
+        self.loadingIndicator.isHidden = true
+        
         setupViewModel()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.searchBar.text = ""
+        viewModel.getViewedGames()
         
     }
     
@@ -42,8 +52,23 @@ class GamesViewController: UIViewController {
     }
     
     private func setupViewModel() {
+        
+        viewModel.didUpdateViewedGames = { [weak self] viewed in
+            guard let strongSelf = self else { return }
+            strongSelf.viewedGames = viewed
+            strongSelf.viewModel.ready()
+        }
+        
         viewModel.isRefreshing = { loading in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = loading
+            
+            if loading {
+                self.loadingIndicator.isHidden = false
+                self.loadingIndicator.startAnimating()
+            } else {
+                self.loadingIndicator.isHidden = true
+                self.loadingIndicator.stopAnimating()
+            }
+            
         }
         
         viewModel.didFetchGames = { [weak self] games in
@@ -54,9 +79,10 @@ class GamesViewController: UIViewController {
         
         viewModel.didSelecteGame = { [weak self] id in
             guard let strongSelf = self else { return }
-            let alertController = UIAlertController(title: "\(id)", message: nil, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            strongSelf.present(alertController, animated: true, completion: nil)
+            let detailsVc = self?.storyboard?.instantiateViewController(withIdentifier: "GameDetailViewController") as! GameDetailViewController
+            detailsVc.gameId = id
+            strongSelf.navigationController?.pushViewController(detailsVc, animated: true)
+            
         }
     }
     
@@ -82,6 +108,15 @@ extension GamesViewController: UICollectionViewDataSource {
         
         if let genres = data[indexPath.item].genres {
             cell.genreLabel.text = genres.map { ($0.name ?? "") }.joined(separator: ", ")
+        }
+        
+        if let id = data[indexPath.item].id  {
+            if viewedGames.contains(id) {
+                cell.containerView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
+            } else {
+                cell.containerView.backgroundColor = .white
+            }
+         
         }
         
         return cell
@@ -117,22 +152,18 @@ extension GamesViewController: UICollectionViewDelegateFlowLayout {
 
 extension GamesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            viewModel.filterGames("")
-        } else {
-            viewModel.filterGames(searchBar.text ?? "")
-        }
+        viewModel.searchGames(searchBar.text ?? "")
         
     }
     
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        viewModel.filterGames("")
+        viewModel.searchGames("")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.resignFirstResponder()
-     }
+        searchBar.resignFirstResponder()
+    }
     
     
 }

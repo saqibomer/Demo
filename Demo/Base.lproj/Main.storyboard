@@ -18,12 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search for games" translatesAutoresizingMaskIntoConstraints="NO" id="NqB-MK-95Z">
-                                <rect key="frame" x="20" y="140" width="374" height="56"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Ux-Hs-vV2">
-                                <rect key="frame" x="0.0" y="201" width="414" height="612"/>
+                                <rect key="frame" x="0.0" y="149" width="414" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="9bZ-2k-uTM">
                                     <size key="itemSize" width="372" height="309"/>
@@ -48,14 +44,14 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="metacritics:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-lq-yJf">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="metacritics:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-lq-yJf">
                                                             <rect key="frame" x="152" y="169" width="75.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="96" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-LA-HL2">
-                                                            <rect key="frame" x="231.5" y="167" width="20.5" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="96" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-LA-HL2">
+                                                            <rect key="frame" x="232" y="167" width="132" height="21.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                                             <color key="textColor" red="0.84705882349999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -81,6 +77,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="JCm-9e-oDM" secondAttribute="trailing" constant="8" id="HAe-hZ-sbW"/>
                                                         <constraint firstItem="JfP-LA-HL2" firstAttribute="leading" secondItem="uuY-lq-yJf" secondAttribute="trailing" constant="4" id="KDF-oX-L5Q"/>
                                                         <constraint firstItem="JfP-LA-HL2" firstAttribute="centerY" secondItem="uuY-lq-yJf" secondAttribute="centerY" id="Ln5-mA-MqY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JfP-LA-HL2" secondAttribute="trailing" constant="8" id="Uvj-OF-W6j"/>
                                                         <constraint firstItem="JCm-9e-oDM" firstAttribute="top" secondItem="uuY-lq-yJf" secondAttribute="bottom" constant="5" id="Wah-Ty-yqQ"/>
                                                         <constraint firstAttribute="trailing" secondItem="u48-nQ-8HK" secondAttribute="trailing" constant="8" id="bmY-Xb-yCG"/>
                                                         <constraint firstItem="JCm-9e-oDM" firstAttribute="leading" secondItem="g8T-Kb-dLD" secondAttribute="trailing" constant="16" id="cPn-XH-S9K"/>
@@ -109,30 +106,78 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Search for games" translatesAutoresizingMaskIntoConstraints="NO" id="NqB-MK-95Z">
+                                <rect key="frame" x="20" y="88" width="374" height="56"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xd7-2i-X7p">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.062745098040000002" green="0.3921568627" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NqB-MK-95Z" secondAttribute="trailing" constant="20" id="2tK-pG-Lhm"/>
+                            <constraint firstItem="xd7-2i-X7p" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9GA-OA-bww"/>
                             <constraint firstItem="0Ux-Hs-vV2" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="N0N-bo-Lzq"/>
                             <constraint firstItem="NqB-MK-95Z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xew-Q4-Az3"/>
                             <constraint firstItem="NqB-MK-95Z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Zpx-nd-NhI"/>
+                            <constraint firstItem="xd7-2i-X7p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iB2-sL-er1"/>
                             <constraint firstItem="0Ux-Hs-vV2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tUr-X5-apd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Ux-Hs-vV2" secondAttribute="trailing" id="w6v-NI-vE4"/>
                             <constraint firstItem="0Ux-Hs-vV2" firstAttribute="top" secondItem="NqB-MK-95Z" secondAttribute="bottom" constant="5" id="xCT-dn-uHg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Games" id="lXa-Lr-8vd">
-                        <barButtonItem key="backBarButtonItem" title=" " id="BMI-cK-mbW"/>
+                        <barButtonItem key="backBarButtonItem" title=" Games" id="BMI-cK-mbW"/>
                     </navigationItem>
                     <connections>
                         <outlet property="gamesCollectionView" destination="0Ux-Hs-vV2" id="LrA-jh-iZv"/>
+                        <outlet property="loadingIndicator" destination="xd7-2i-X7p" id="DlS-fF-5rC"/>
                         <outlet property="searchBar" destination="NqB-MK-95Z" id="7b8-6F-fTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1833.3333333333335" y="69.642857142857139"/>
+        </scene>
+        <!--Game Detail View Controller-->
+        <scene sceneID="dKo-8W-TsA">
+            <objects>
+                <viewController storyboardIdentifier="GameDetailViewController" id="nuJ-hN-zCf" customClass="GameDetailViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ObG-o5-aIt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HTa-VJ-tgo">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xTH-uT-ROz">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.062745098040000002" green="0.3921568627" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bfk-w3-jIv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xTH-uT-ROz" firstAttribute="centerY" secondItem="ObG-o5-aIt" secondAttribute="centerY" id="4m1-T3-fPl"/>
+                            <constraint firstItem="HTa-VJ-tgo" firstAttribute="top" secondItem="bfk-w3-jIv" secondAttribute="top" constant="-44" id="CQz-6Z-nAY"/>
+                            <constraint firstItem="HTa-VJ-tgo" firstAttribute="trailing" secondItem="bfk-w3-jIv" secondAttribute="trailing" id="KhC-dZ-IuE"/>
+                            <constraint firstItem="xTH-uT-ROz" firstAttribute="centerX" secondItem="ObG-o5-aIt" secondAttribute="centerX" id="dYq-Qd-aCI"/>
+                            <constraint firstItem="HTa-VJ-tgo" firstAttribute="leading" secondItem="bfk-w3-jIv" secondAttribute="leading" id="hhU-1w-xzf"/>
+                            <constraint firstAttribute="bottom" secondItem="HTa-VJ-tgo" secondAttribute="bottom" id="rdC-1d-cvB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailsTableView" destination="HTa-VJ-tgo" id="1ix-DK-omR"/>
+                        <outlet property="loadingIndicator" destination="xTH-uT-ROz" id="hhf-qV-sdi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pn9-oX-o5r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2602.898550724638" y="69.642857142857139"/>
         </scene>
         <!--Games-->
         <scene sceneID="EKE-k4-V4S">

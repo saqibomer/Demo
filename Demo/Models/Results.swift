@@ -10,6 +10,7 @@ struct Results : Codable {
 	let id : Int?
 	let slug : String?
 	let name : String?
+    
 	let released : String?
 	let tba : Bool?
 	let backgroundImage : String?
@@ -36,6 +37,11 @@ struct Results : Codable {
 	let tags : [Tags]?
 	let esrbRating : EsrbRating?
 	let shortScreenshots : [ShortScreenshots]?
+    
+    
+    let description : String?
+    let redditUrl : String?
+    let website : String?
 
 	enum CodingKeys: String, CodingKey {
 
@@ -68,6 +74,10 @@ struct Results : Codable {
 		case tags = "tags"
 		case esrbRating = "esrb_rating"
 		case shortScreenshots = "short_screenshots"
+        
+        case description = "description"
+        case redditUrl = "reddit_url"
+        case website = "website"
 	}
 
 	init(from decoder: Decoder) throws {
@@ -101,6 +111,10 @@ struct Results : Codable {
 		tags = try values.decodeIfPresent([Tags].self, forKey: .tags)
 		esrbRating = try values.decodeIfPresent(EsrbRating.self, forKey: .esrbRating)
 		shortScreenshots = try values.decodeIfPresent([ShortScreenshots].self, forKey: .shortScreenshots)
+        
+        description = try values.decodeIfPresent(String.self, forKey: .description)
+        redditUrl = try values.decodeIfPresent(String.self, forKey: .redditUrl)
+        website = try values.decodeIfPresent(String.self, forKey: .website)
 	}
 
 }
