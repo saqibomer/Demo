@@ -32,6 +32,7 @@
 		AAE2E92C261EDBD30058EE13 /* EsrbRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E91B261EDBD20058EE13 /* EsrbRating.swift */; };
 		AAE2E92D261EDBD30058EE13 /* ParentPlatforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E91C261EDBD20058EE13 /* ParentPlatforms.swift */; };
 		AAE2E92E261EDBD30058EE13 /* AddedByStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E91D261EDBD30058EE13 /* AddedByStatus.swift */; };
+		AAE2E984261EEC490058EE13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E983261EEC490058EE13 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		AAE2E91B261EDBD20058EE13 /* EsrbRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsrbRating.swift; sourceTree = "<group>"; };
 		AAE2E91C261EDBD20058EE13 /* ParentPlatforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentPlatforms.swift; sourceTree = "<group>"; };
 		AAE2E91D261EDBD30058EE13 /* AddedByStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedByStatus.swift; sourceTree = "<group>"; };
+		AAE2E983261EEC490058EE13 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 		AAE2E8B3261ED3D90058EE13 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				AAE2E97D261EEBC00058EE13 /* Resources */,
 				AAE2E90C261EDB3A0058EE13 /* Models */,
 				AAE2E908261ED5D40058EE13 /* Config */,
 				AAE2E8B4261ED3D90058EE13 /* AppDelegate.swift */,
@@ -199,6 +202,14 @@
 				AAE2E910261EDBD20058EE13 /* Years.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AAE2E97D261EEBC00058EE13 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AAE2E983261EEC490058EE13 /* Environment.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +352,7 @@
 				AAE2E924261EDBD30058EE13 /* Clips.swift in Sources */,
 				AAE2E921261EDBD30058EE13 /* Years.swift in Sources */,
 				AAE2E923261EDBD30058EE13 /* ShortScreenshots.swift in Sources */,
+				AAE2E984261EEC490058EE13 /* Environment.swift in Sources */,
 				AAE2E91E261EDBD30058EE13 /* Filters.swift in Sources */,
 				AAE2E928261EDBD30058EE13 /* Tags.swift in Sources */,
 				AAE2E8B5261ED3D90058EE13 /* AppDelegate.swift in Sources */,
@@ -407,6 +419,7 @@
 /* Begin XCBuildConfiguration section */
 		AAE2E8ED261ED4350058EE13 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -468,6 +481,7 @@
 		};
 		AAE2E8EE261ED4350058EE13 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -479,7 +493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,6 +502,7 @@
 		};
 		AAE2E8EF261ED4350058EE13 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -510,6 +525,7 @@
 		};
 		AAE2E8F0261ED4350058EE13 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -530,6 +546,7 @@
 		};
 		AAE2E8F1261ED4560058EE13 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -591,6 +608,7 @@
 		};
 		AAE2E8F2261ED4560058EE13 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -602,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,6 +629,7 @@
 		};
 		AAE2E8F3261ED4560058EE13 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -633,6 +652,7 @@
 		};
 		AAE2E8F4261ED4560058EE13 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -653,6 +673,7 @@
 		};
 		AAE2E8F5261ED4630058EE13 /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -714,6 +735,7 @@
 		};
 		AAE2E8F6261ED4630058EE13 /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -725,7 +747,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -734,6 +756,7 @@
 		};
 		AAE2E8F7261ED4630058EE13 /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -756,6 +779,7 @@
 		};
 		AAE2E8F8261ED4630058EE13 /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -776,6 +800,7 @@
 		};
 		AAE2E8F9261ED4760058EE13 /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -831,6 +856,7 @@
 		};
 		AAE2E8FA261ED4760058EE13 /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -842,7 +868,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -851,6 +877,7 @@
 		};
 		AAE2E8FB261ED4760058EE13 /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -873,6 +900,7 @@
 		};
 		AAE2E8FC261ED4760058EE13 /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E909261ED5FB0058EE13 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -893,6 +921,7 @@
 		};
 		AAE2E8FD261ED49B0058EE13 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -948,6 +977,7 @@
 		};
 		AAE2E8FE261ED49B0058EE13 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -959,7 +989,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -968,6 +998,7 @@
 		};
 		AAE2E8FF261ED49B0058EE13 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -990,6 +1021,7 @@
 		};
 		AAE2E900261ED49B0058EE13 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90A261ED7880058EE13 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1010,6 +1042,7 @@
 		};
 		AAE2E901261ED4A40058EE13 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1065,6 +1098,7 @@
 		};
 		AAE2E902261ED4A40058EE13 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1076,7 +1110,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kl.test.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APPBUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1085,6 +1119,7 @@
 		};
 		AAE2E903261ED4A40058EE13 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1107,6 +1142,7 @@
 		};
 		AAE2E904261ED4A40058EE13 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE2E90B261ED79D0058EE13 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
