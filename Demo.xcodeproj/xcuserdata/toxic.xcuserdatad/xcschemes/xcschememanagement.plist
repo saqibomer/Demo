@@ -9,6 +9,39 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Development.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Production.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Staging.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>AAE2E8B0261ED3D90058EE13</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAE2E8C9261ED3DB0058EE13</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAE2E8D4261ED3DB0058EE13</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
