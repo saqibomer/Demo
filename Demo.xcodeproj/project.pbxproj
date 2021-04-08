@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AAE2E8B5261ED3D90058EE13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E8B4261ED3D90058EE13 /* AppDelegate.swift */; };
-		AAE2E8B7261ED3D90058EE13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E8B6261ED3D90058EE13 /* SceneDelegate.swift */; };
 		AAE2E8B9261ED3D90058EE13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E8B8261ED3D90058EE13 /* ViewController.swift */; };
 		AAE2E8BC261ED3D90058EE13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE2E8BA261ED3D90058EE13 /* Main.storyboard */; };
 		AAE2E8BF261ED3D90058EE13 /* Demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E8BD261ED3D90058EE13 /* Demo.xcdatamodeld */; };
@@ -55,7 +54,6 @@
 /* Begin PBXFileReference section */
 		AAE2E8B1261ED3D90058EE13 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE2E8B4261ED3D90058EE13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AAE2E8B6261ED3D90058EE13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AAE2E8B8261ED3D90058EE13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AAE2E8BB261ED3D90058EE13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AAE2E8BE261ED3D90058EE13 /* Demo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demo.xcdatamodel; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				AAE2E90C261EDB3A0058EE13 /* Models */,
 				AAE2E908261ED5D40058EE13 /* Config */,
 				AAE2E8B4261ED3D90058EE13 /* AppDelegate.swift */,
-				AAE2E8B6261ED3D90058EE13 /* SceneDelegate.swift */,
 				AAE2E8B8261ED3D90058EE13 /* ViewController.swift */,
 				AAE2E8BA261ED3D90058EE13 /* Main.storyboard */,
 				AAE2E8C0261ED3DA0058EE13 /* Assets.xcassets */,
@@ -351,7 +348,6 @@
 				AAE2E927261EDBD30058EE13 /* Results.swift in Sources */,
 				AAE2E8BF261ED3D90058EE13 /* Demo.xcdatamodeld in Sources */,
 				AAE2E92C261EDBD30058EE13 /* EsrbRating.swift in Sources */,
-				AAE2E8B7261ED3D90058EE13 /* SceneDelegate.swift in Sources */,
 				AAE2E92B261EDBD30058EE13 /* GamesResponse.swift in Sources */,
 				AAE2E92E261EDBD30058EE13 /* AddedByStatus.swift in Sources */,
 				AAE2E925261EDBD30058EE13 /* Stores.swift in Sources */,
