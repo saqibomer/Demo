@@ -37,6 +37,8 @@
 		AAE2E9A4261EF5DE0058EE13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9A3261EF5DE0058EE13 /* Constants.swift */; };
 		AAE2E9AA261EFAAC0058EE13 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9A9261EFAAC0058EE13 /* GamesViewController.swift */; };
 		AAE2E9B2261F0D1E0058EE13 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9B1261F0D1E0058EE13 /* Requirement.swift */; };
+		AAE2E9BA261F12B70058EE13 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9B8261F12B70058EE13 /* GameCollectionViewCell.swift */; };
+		AAE691B4261F1F8A00CDB366 /* UIImageView+Exntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE691B3261F1F8A00CDB366 /* UIImageView+Exntensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		AAE2E9A3261EF5DE0058EE13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AAE2E9A9261EFAAC0058EE13 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		AAE2E9B1261F0D1E0058EE13 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
+		AAE2E9B8261F12B70058EE13 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
+		AAE691B3261F1F8A00CDB366 /* UIImageView+Exntensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Exntensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 		AAE2E8B3261ED3D90058EE13 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				AAE6918B261F1A4400CDB366 /* Extensions */,
 				AAE2E9A8261EFA970058EE13 /* Controllers */,
 				AAE2E9A1261EF5C50058EE13 /* Helpers */,
 				AAE2E998261EF4690058EE13 /* NetworkClient */,
@@ -267,9 +272,34 @@
 		AAE2E9A8261EFA970058EE13 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AAE2E9A9261EFAAC0058EE13 /* GamesViewController.swift */,
+				AAE2E9B6261F12870058EE13 /* GamesViewController */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AAE2E9B6261F12870058EE13 /* GamesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AAE2E9B7261F129B0058EE13 /* GameCollectionViewCell */,
+				AAE2E9A9261EFAAC0058EE13 /* GamesViewController.swift */,
+			);
+			path = GamesViewController;
+			sourceTree = "<group>";
+		};
+		AAE2E9B7261F129B0058EE13 /* GameCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AAE2E9B8261F12B70058EE13 /* GameCollectionViewCell.swift */,
+			);
+			path = GameCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		AAE6918B261F1A4400CDB366 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AAE691B3261F1F8A00CDB366 /* UIImageView+Exntensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,10 +436,12 @@
 				AAE2E92A261EDBD30058EE13 /* Genres.swift in Sources */,
 				AAE2E92D261EDBD30058EE13 /* ParentPlatforms.swift in Sources */,
 				AAE2E920261EDBD30058EE13 /* Platform.swift in Sources */,
+				AAE2E9BA261F12B70058EE13 /* GameCollectionViewCell.swift in Sources */,
 				AAE2E9AA261EFAAC0058EE13 /* GamesViewController.swift in Sources */,
 				AAE2E922261EDBD30058EE13 /* Platforms.swift in Sources */,
 				AAE2E926261EDBD30058EE13 /* Clip.swift in Sources */,
 				AAE2E924261EDBD30058EE13 /* Clips.swift in Sources */,
+				AAE691B4261F1F8A00CDB366 /* UIImageView+Exntensions.swift in Sources */,
 				AAE2E921261EDBD30058EE13 /* Years.swift in Sources */,
 				AAE2E923261EDBD30058EE13 /* ShortScreenshots.swift in Sources */,
 				AAE2E984261EEC490058EE13 /* Environment.swift in Sources */,
