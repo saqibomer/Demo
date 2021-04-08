@@ -9,8 +9,8 @@ import Foundation
 struct Platforms : Codable {
 	let platform : Platform?
 	let releasedAt : String?
-	let requirementsEn : String?
-	let requirementsRu : String?
+	let requirementsEn : Requirement?
+	let requirementsRu : Requirement?
 
 	enum CodingKeys: String, CodingKey {
 
@@ -24,8 +24,8 @@ struct Platforms : Codable {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		platform = try values.decodeIfPresent(Platform.self, forKey: .platform)
         releasedAt = try values.decodeIfPresent(String.self, forKey: .releasedAt)
-        requirementsEn = try values.decodeIfPresent(String.self, forKey: .requirementsEn)
-        requirementsRu = try values.decodeIfPresent(String.self, forKey: .requirementsRu)
+        requirementsEn = try values.decodeIfPresent(Requirement.self, forKey: .requirementsEn)
+        requirementsRu = try values.decodeIfPresent(Requirement.self, forKey: .requirementsRu)
 	}
 
 }
