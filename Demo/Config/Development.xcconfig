@@ -5,5 +5,4 @@
 //  Created by TOxIC on 08/04/2021.
 //
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
+BASEURL = https://api.rawg.io/api/games?page_size=10&page=1
