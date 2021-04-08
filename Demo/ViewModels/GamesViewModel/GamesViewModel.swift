@@ -61,6 +61,11 @@ final class GamesViewModel {
         didSelecteGame?(id)
     }
     
+    func didSelectFavorite(withId id: Int) {
+        
+        didSelecteGame?(id)
+    }
+    
     func searchGames(_ searchString: String) {
         isRefreshing?(true)
         if searchString != "" && searchString.count > 3 {

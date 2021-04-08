@@ -38,7 +38,6 @@ final class NetworkClient: NetworkingService {
     @discardableResult
     func fetchGameDetails(withId id: Int, completion: @escaping (Results?) -> ()) -> URLSessionDataTask {
         let urlString = baseURl+endpoints.games+"/\(id)"
-        print(urlString)
         let request = URLRequest(url: URL(string: urlString)!)
         let task = session.dataTask(with: request) { (data, _, _) in
             DispatchQueue.main.async {

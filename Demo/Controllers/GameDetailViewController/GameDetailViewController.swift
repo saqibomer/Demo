@@ -66,9 +66,9 @@ class GameDetailViewController: UIViewController {
             
             let filtered = favorite.filter({$0.id == strongSelf.gameId})
             if filtered.count > 0 {
-                strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorited", style: .plain, target: self, action: #selector(strongSelf.favouriteBtnAction))
+                strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favourited", style: .plain, target: self, action: #selector(strongSelf.favouriteBtnAction))
             } else {
-                strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(strongSelf.favouriteBtnAction))
+                strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favourite", style: .plain, target: self, action: #selector(strongSelf.favouriteBtnAction))
             }
         }
         
@@ -78,12 +78,12 @@ class GameDetailViewController: UIViewController {
     @objc func favouriteBtnAction(_ sender: UIBarButtonItem){
         
         switch sender.title {
-        case "Favorite":
+        case "Favourite":
             guard let game = self.gameDetail else {
                 return
             }
             viewModel.addToFavoriteGames(game: game)
-        case "Favorited":
+        case "Favourited":
             removeFromFavourite()
             
         default:
