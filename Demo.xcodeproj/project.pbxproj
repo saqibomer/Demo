@@ -206,13 +206,12 @@
 			isa = PBXGroup;
 			children = (
 				AAE6918B261F1A4400CDB366 /* Extensions */,
-				AAE2E9A8261EFA970058EE13 /* Controllers */,
-				AAE2E9A1261EF5C50058EE13 /* Helpers */,
-				AAE2E998261EF4690058EE13 /* NetworkClient */,
-				AAE2E98E261EF1650058EE13 /* ViewModels */,
-				AAE2E97D261EEBC00058EE13 /* Resources */,
-				AAE2E90C261EDB3A0058EE13 /* Models */,
 				AAE2E908261ED5D40058EE13 /* Config */,
+				AAE2E9A8261EFA970058EE13 /* Controllers */,
+				AAE2E98E261EF1650058EE13 /* ViewModels */,
+				AAE2E90C261EDB3A0058EE13 /* Models */,
+				AAE2E998261EF4690058EE13 /* NetworkClient */,
+				AAE2E9A1261EF5C50058EE13 /* Helpers */,
 				AAE2E8B4261ED3D90058EE13 /* AppDelegate.swift */,
 				AAE2E8BA261ED3D90058EE13 /* Main.storyboard */,
 				AAE2E8C0261ED3DA0058EE13 /* Assets.xcassets */,
@@ -244,6 +243,7 @@
 		AAE2E908261ED5D40058EE13 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				AAE2E983261EEC490058EE13 /* Environment.swift */,
 				AAE2E909261ED5FB0058EE13 /* Development.xcconfig */,
 				AAE2E90A261ED7880058EE13 /* Staging.xcconfig */,
 				AAE2E90B261ED79D0058EE13 /* Production.xcconfig */,
@@ -274,14 +274,6 @@
 				AAE2E9B1261F0D1E0058EE13 /* Requirement.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		AAE2E97D261EEBC00058EE13 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				AAE2E983261EEC490058EE13 /* Environment.swift */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		AAE2E98E261EF1650058EE13 /* ViewModels */ = {
