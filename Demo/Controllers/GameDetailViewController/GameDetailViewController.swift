@@ -60,11 +60,11 @@ class GameDetailViewController: UIViewController {
             strongSelf.detailsTableView.reloadData()
         }
         
-        viewModel.didUpdateFavourite = { [weak self] favorite in
+        viewModel.didUpdateFavourite = { [weak self] in
             guard let strongSelf = self else { return }
             
             
-            let filtered = favorite.filter({$0.id == strongSelf.gameId})
+            let filtered = strongSelf.viewModel.favouriteGames.filter({$0.id == strongSelf.gameId})
             if filtered.count > 0 {
                 strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favourited", style: .plain, target: self, action: #selector(strongSelf.favouriteBtnAction))
             } else {

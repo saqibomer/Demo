@@ -15,10 +15,6 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     let viewModel = GamesViewModel(networkingService: NetworkClient())
-    private var data: [Results]?
-    private var viewedGames: [Int] = []
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +49,8 @@ class GamesViewController: UIViewController {
     
     private func setupViewModel() {
         
-        viewModel.didUpdateViewedGames = { [weak self] viewed in
+        viewModel.didUpdateViewedGames = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.viewedGames = viewed
             strongSelf.viewModel.ready()
         }
         
@@ -71,9 +66,8 @@ class GamesViewController: UIViewController {
             
         }
         
-        viewModel.didFetchGames = { [weak self] games in
+        viewModel.didFetchGames = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.data = games
             strongSelf.gamesCollectionView.reloadData()
         }
         
@@ -90,28 +84,29 @@ class GamesViewController: UIViewController {
 
 extension GamesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data?.count ?? 0
+        
+        return viewModel.games.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let data = data else { return UICollectionViewCell() }
+        
         let cell: GameCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionViewCell", for: indexPath) as! GameCollectionViewCell
         //        @IBOutlet weak var containerView: UIView!
-        cell.gameTitleLabel.text = data[indexPath.item].name
-        cell.metaCriticsLabel.text = "\(data[indexPath.item].metacritic ?? 0)"
-        if let url: URL = URL(string: data[indexPath.item].backgroundImage ?? "") {
+        cell.gameTitleLabel.text = viewModel.games[indexPath.item].name
+        cell.metaCriticsLabel.text = "\(viewModel.games[indexPath.item].metacritic ?? 0)"
+        if let url: URL = URL(string: viewModel.games[indexPath.item].backgroundImage ?? "") {
             cell.gameImageView.loadImageWithUrl(url)
         }
         
         
         
-        if let genres = data[indexPath.item].genres {
+        if let genres = viewModel.games[indexPath.item].genres {
             cell.genreLabel.text = genres.map { ($0.name ?? "") }.joined(separator: ", ")
         }
         
-        if let id = data[indexPath.item].id  {
-            if viewedGames.contains(id) {
+        if let id = viewModel.games[indexPath.item].id  {
+            if viewModel.viewedGames.contains(id) {
                 cell.containerView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
             } else {
                 cell.containerView.backgroundColor = .white

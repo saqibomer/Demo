@@ -35,7 +35,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="372" height="309"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-Yc-Oc9">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-Yc-Oc9" customClass="SwipeView" customModule="Demo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="372" height="309"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u48-nQ-8HK">
@@ -44,14 +44,17 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="metacritics:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-lq-yJf">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="metacritics:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-lq-yJf">
                                                             <rect key="frame" x="152" y="169" width="75.5" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="75.5" id="JEE-fh-I5v"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="96" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-LA-HL2">
-                                                            <rect key="frame" x="232" y="167" width="132" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="96" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-LA-HL2">
+                                                            <rect key="frame" x="231.5" y="166.5" width="132.5" height="22"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                                             <color key="textColor" red="0.84705882349999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -82,6 +85,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="u48-nQ-8HK" secondAttribute="trailing" constant="8" id="bmY-Xb-yCG"/>
                                                         <constraint firstItem="JCm-9e-oDM" firstAttribute="leading" secondItem="g8T-Kb-dLD" secondAttribute="trailing" constant="16" id="cPn-XH-S9K"/>
                                                         <constraint firstItem="u48-nQ-8HK" firstAttribute="top" secondItem="Dj8-Yc-Oc9" secondAttribute="top" constant="15" id="eTY-rT-qrB"/>
+                                                        <constraint firstItem="JCm-9e-oDM" firstAttribute="top" secondItem="JfP-LA-HL2" secondAttribute="bottom" constant="2.5" id="iKk-2l-You"/>
                                                         <constraint firstItem="g8T-Kb-dLD" firstAttribute="leading" secondItem="Dj8-Yc-Oc9" secondAttribute="leading" constant="16" id="jKA-AE-HOP"/>
                                                         <constraint firstItem="u48-nQ-8HK" firstAttribute="leading" secondItem="g8T-Kb-dLD" secondAttribute="trailing" constant="16" id="nEm-We-LlN"/>
                                                         <constraint firstItem="uuY-lq-yJf" firstAttribute="leading" secondItem="g8T-Kb-dLD" secondAttribute="trailing" constant="16" id="tMA-oB-mtG"/>
@@ -97,7 +101,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="372" height="309"/>
                                         <connections>
-                                            <outlet property="containerView" destination="Dj8-Yc-Oc9" id="SrV-y8-ofe"/>
+                                            <outlet property="containerView" destination="Dj8-Yc-Oc9" id="0Cb-Zt-aK5"/>
                                             <outlet property="gameImageView" destination="g8T-Kb-dLD" id="8De-Me-bjj"/>
                                             <outlet property="gameTitleLabel" destination="u48-nQ-8HK" id="zXQ-z7-PR4"/>
                                             <outlet property="genreLabel" destination="JCm-9e-oDM" id="IRc-Kx-gXh"/>
@@ -223,7 +227,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="372" height="309"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arx-Fw-muR">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V83-Lf-PEz">
+                                                    <rect key="frame" x="272" y="0.0" width="100" height="309"/>
+                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="lX8-EL-Eia"/>
+                                                    </constraints>
+                                                    <state key="normal" image="deleteIcon"/>
+                                                    <connections>
+                                                        <action selector="deleteBtnAction:" destination="O2Q-Mh-qGj" eventType="touchUpInside" id="j73-Gt-lU8"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arx-Fw-muR" customClass="SwipeView" customModule="Demo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="372" height="309"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOZ-sb-gHs">
@@ -284,12 +299,16 @@
                                                 <constraint firstItem="Arx-Fw-muR" firstAttribute="top" secondItem="mqu-qE-lgD" secondAttribute="top" id="5Y7-de-13b"/>
                                                 <constraint firstItem="Arx-Fw-muR" firstAttribute="leading" secondItem="mqu-qE-lgD" secondAttribute="leading" id="9nx-F7-PPS"/>
                                                 <constraint firstAttribute="trailing" secondItem="Arx-Fw-muR" secondAttribute="trailing" id="UHs-Ot-GLX"/>
+                                                <constraint firstAttribute="trailing" secondItem="V83-Lf-PEz" secondAttribute="trailing" id="WnS-Wj-G8F"/>
+                                                <constraint firstAttribute="bottom" secondItem="V83-Lf-PEz" secondAttribute="bottom" id="h3S-xc-Z3e"/>
+                                                <constraint firstItem="V83-Lf-PEz" firstAttribute="top" secondItem="mqu-qE-lgD" secondAttribute="top" id="m5V-Pi-ush"/>
                                                 <constraint firstAttribute="bottom" secondItem="Arx-Fw-muR" secondAttribute="bottom" id="rXE-hk-MII"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="372" height="309"/>
                                         <connections>
                                             <outlet property="containerView" destination="Arx-Fw-muR" id="Cml-wo-gzp"/>
+                                            <outlet property="deleteBtn" destination="V83-Lf-PEz" id="JEV-JM-KhY"/>
                                             <outlet property="gameImageView" destination="Rf5-Ih-v0P" id="nRN-2v-ZlV"/>
                                             <outlet property="gameTitleLabel" destination="iOZ-sb-gHs" id="bbn-si-sBL"/>
                                             <outlet property="genreLabel" destination="h77-3g-8ov" id="cPd-Md-w1b"/>
@@ -298,14 +317,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no favourites found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdh-fa-oey">
+                                <rect key="frame" x="89" y="111" width="236" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="C6c-Gx-HAI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Cdh-fa-oey" firstAttribute="top" secondItem="C6c-Gx-HAI" secondAttribute="top" constant="23" id="UzN-UB-yFT"/>
                             <constraint firstAttribute="trailing" secondItem="E2X-jU-fkW" secondAttribute="trailing" id="dJ7-i9-lUU"/>
                             <constraint firstItem="E2X-jU-fkW" firstAttribute="top" secondItem="C6c-Gx-HAI" secondAttribute="top" id="piC-33-dem"/>
                             <constraint firstItem="E2X-jU-fkW" firstAttribute="bottom" secondItem="C6c-Gx-HAI" secondAttribute="bottom" id="qIa-4w-ik0"/>
                             <constraint firstItem="E2X-jU-fkW" firstAttribute="leading" secondItem="C6c-Gx-HAI" secondAttribute="leading" id="vmy-IO-pJD"/>
+                            <constraint firstItem="Cdh-fa-oey" firstAttribute="centerX" secondItem="FHv-em-frO" secondAttribute="centerX" id="vya-7l-Uhm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favourites" id="2se-tk-MNw">
@@ -313,6 +340,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="gamesCollectionView" destination="E2X-jU-fkW" id="HWf-YW-WiB"/>
+                        <outlet property="notFoundLabel" destination="Cdh-fa-oey" id="wwk-tf-0fF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHQ-FB-Slm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -361,6 +389,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="deleteIcon" width="14" height="18"/>
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="gamesSelected" width="128" height="128"/>

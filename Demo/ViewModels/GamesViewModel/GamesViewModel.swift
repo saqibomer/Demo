@@ -11,18 +11,20 @@ final class GamesViewModel {
     // Outputs
     var isRefreshing: ((Bool) -> Void)?
     var didSelecteGame: ((Int) -> Void)?
-    var didFetchGames: (([Results]) -> Void)?
+    var didFetchGames: (() -> Void)?
     var didFetchGameDetails: ((Results) -> Void)?
-    var didUpdateFavourite: (([Results]) -> Void)?
-    var didUpdateViewedGames: (([Int]) -> Void)?
+    var didUpdateFavourite: (() -> Void)?
+    var didUpdateViewedGames: (() -> Void)?
     
     
     private(set) var games: [Results] = [Results]() {
         didSet {
-            didFetchGames?(self.games)
+            didFetchGames?()
         }
     }
     
+    private(set) var viewedGames: [Int] = []
+    private(set) var favouriteGames: [Results] = []
     
     /*
      MARK: fetchedGames to retain fetched results when user cancells search fetchedGames will be used
@@ -73,7 +75,8 @@ final class GamesViewModel {
             
         } else {
             isRefreshing?(false)
-            didFetchGames?(self.fetchedGames)
+            self.games = self.fetchedGames
+            didFetchGames?()
         }
         
     }
@@ -96,12 +99,13 @@ final class GamesViewModel {
         if let savedGames = UserDefaults.standard.object(forKey: UserDefaultsKeys.favorite) as? Data {
             let decoder = JSONDecoder()
             if let favorites = try? decoder.decode([Results].self, from: savedGames) {
-                self.didUpdateFavourite?(favorites)
+                self.favouriteGames = favorites
+                self.didUpdateFavourite?()
             } else {
-                self.didUpdateFavourite?([])
+                self.didUpdateFavourite?()
             }
         } else {
-            self.didUpdateFavourite?([])
+            self.didUpdateFavourite?()
         }
         
     }
@@ -117,20 +121,23 @@ final class GamesViewModel {
                     let encoder = JSONEncoder()
                     if let encoded = try? encoder.encode(favorites) {
                         UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
-                        self.didUpdateFavourite?(favorites)
+                        self.favouriteGames = favorites
+                        self.didUpdateFavourite?()
                     }
                 }
             } else {
-                self.didUpdateFavourite?([])
+                self.didUpdateFavourite?()
             }
         } else {
             let encoder = JSONEncoder()
             let favorites = [game]
             if let encoded = try? encoder.encode(favorites) {
                 UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
-                self.didUpdateFavourite?(favorites)
+                self.favouriteGames = favorites
+                self.didUpdateFavourite?()
+                
             } else {
-                self.didUpdateFavourite?([])
+                self.didUpdateFavourite?()
             }
             
         }
@@ -148,7 +155,8 @@ final class GamesViewModel {
                 let encoder = JSONEncoder()
                 if let encoded = try? encoder.encode(filtered) {
                     UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.favorite)
-                    self.didUpdateFavourite?(filtered)
+                    self.favouriteGames = filtered
+                    self.didUpdateFavourite?()
                 }
             }
         }
@@ -162,10 +170,11 @@ final class GamesViewModel {
     func getViewedGames() {
         
         guard let viewed = UserDefaults.standard.array(forKey: UserDefaultsKeys.viewed) as? [Int] else {
-            self.didUpdateViewedGames?([])
+            self.didUpdateViewedGames?()
             return
         }
-        self.didUpdateViewedGames?(viewed)
+        self.viewedGames = viewed
+        self.didUpdateViewedGames?()
         
     }
     
@@ -174,12 +183,14 @@ final class GamesViewModel {
         guard var viewed = UserDefaults.standard.array(forKey: UserDefaultsKeys.viewed) as? [Int] else {
             let items = [id]
             UserDefaults.standard.setValue(items, forKey: UserDefaultsKeys.viewed)
-            self.didUpdateViewedGames?(items)
+            self.viewedGames = items
+            self.didUpdateViewedGames?()
             return
         }
         if !viewed.contains(id) {
             viewed.append(id)
-            self.didUpdateViewedGames?(viewed)
+            self.viewedGames = viewed
+            self.didUpdateViewedGames?()
             UserDefaults.standard.setValue(viewed, forKey: UserDefaultsKeys.viewed)
         }
         
