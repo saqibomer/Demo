@@ -85,8 +85,7 @@ extension GamesViewController: UICollectionViewDelegate {
 
 extension GamesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let orientation = UIApplication.shared.statusBarOrientation
-        if orientation == .landscapeLeft {
+        if isDeviceLandscape {
             return CGSize(width: collectionView.frame.width / 2, height: 136)
         }
         return CGSize(width: collectionView.frame.width, height: 136)

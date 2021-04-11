@@ -37,9 +37,11 @@ final class GamesViewModel {
     var isSearchActive = false
     var currentQuery = ""
     
-    /*
-     MARK: fetchedGames to retain fetched results when user cancells search, fetchedGames will be used
+    /**
+     `fetchedGames` retain fetched results when user cancells search, fetchedGames will be used
+
      */
+    
     private(set) var fetchedGames: [Results] = [Results]()
     
     
@@ -50,11 +52,25 @@ final class GamesViewModel {
     // Dependencies
     private let networkingService: NetworkingService
     
+    /**
+     Initializes `GamesViewModel`
+
+     - Parameter networkingService: Network client
+     */
     init(networkingService: NetworkingService) {
         self.networkingService = networkingService
     }
     
-    // Inputs
+    /**
+        The `startFetchingGames` method of the `GamesViewModel` object.
+
+        Fetches games from api:
+
+        ~~~
+        // GamesViewModel:
+        let games = gamesViewModel.startFetchingGames()
+        ~~~
+    */
     func startFetchingGames() {
         isRefreshing?(true)
         self.isSearchActive = false
@@ -75,6 +91,16 @@ final class GamesViewModel {
         }
     }
     
+    /**
+        The `didSelectRow` method of the `GamesViewModel` object.
+
+        triggers `didSelecteGame` completion handler
+        - Parameter at:  IndexPath of row or item selected
+        ~~~
+        // gamesViewModel:
+        gamesViewModel.didSelectRow(at: indexPath)
+        ~~~
+    */
     
     func didSelectRow(at indexPath: IndexPath) {
         if games.isEmpty { return }
@@ -83,12 +109,30 @@ final class GamesViewModel {
         }
         didSelecteGame?(id)
     }
-    
+    /**
+        The `didSelectFavorite` method of the `GamesViewModel` object.
+
+        triggers `didSelecteGame` completion handler
+        - Parameter id:  id of row or item selected
+        ~~~
+        // gamesViewModel:
+        gamesViewModel.didSelectFavorite(id: Int)
+        ~~~
+    */
     func didSelectFavorite(withId id: Int) {
         
         didSelecteGame?(id)
     }
-    
+    /**
+        The `searchGames` method of the `GamesViewModel` object.
+
+        sets state for pagination and calls `startSearchWithQuery` method
+        - Parameter searchString:  search string, shouldReset: Bolean to clear previous current page
+        ~~~
+        // gamesViewModel:
+        gamesViewModel.searchGames(searchString: String, shouldReset: Bool)
+        ~~~
+    */
     func searchGames(_ searchString: String, shouldReset: Bool) {
         
         if searchString != "" && searchString.count > 3 {
@@ -103,7 +147,15 @@ final class GamesViewModel {
         }
         
     }
-    
+    /**
+        The `finishSearching` method of the `GamesViewModel` object.
+
+        clears state for pagination and reset `games` to  `fetchedGames`
+        ~~~
+        // gamesViewModel:
+        gamesViewModel.finishSearching()
+        ~~~
+    */
     func finishSearching() {
         
         isRefreshing?(false)
@@ -112,7 +164,16 @@ final class GamesViewModel {
         isLoadingMore = false
         games = fetchedGames
     }
-    
+    /**
+        The `fetchGameDetails` method of the `GamesViewModel` object.
+
+        triggers `didFetchGameDetails` completion handler
+        - Parameter id:  id of game
+        ~~~
+        // gamesViewModel:
+        gamesViewModel.searchGames(searchString: String, shouldReset: Bool)
+        ~~~
+    */
     func fetchGameDetails(_ id: Int) {
         isRefreshing?(true)
         currentSearchNetworkTask = networkingService.fetchGameDetails(withId: id) { [weak self] details in

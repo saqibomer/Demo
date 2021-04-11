@@ -15,6 +15,8 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     let viewModel = GamesViewModel(networkingService: NetworkClient())
+    var isDeviceLandscape = false
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,13 @@ class GamesViewController: UIViewController {
         gamesCollectionView.delegate = self
         searchBar.delegate = self
         loadingIndicator.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
         
+        if UIDevice.current.orientation.isPortrait {
+            isDeviceLandscape = false
+        } else {
+            isDeviceLandscape = true
+        }
         setupViewModel()
         
     }
@@ -35,17 +43,13 @@ class GamesViewController: UIViewController {
         
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
-            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.scrollDirection = .horizontal
-            }
+    @objc func orientationDidChange() {
+        if UIDevice.current.orientation.isPortrait {
+            isDeviceLandscape = false
         } else {
-            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.scrollDirection = .vertical
-            }
+            isDeviceLandscape = true
         }
+        gamesCollectionView.reloadData()
     }
     
     private func setupViewModel() {

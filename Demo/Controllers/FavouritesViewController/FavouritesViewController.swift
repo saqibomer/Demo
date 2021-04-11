@@ -13,13 +13,19 @@ class FavouritesViewController: UIViewController {
     @IBOutlet weak var gamesCollectionView: UICollectionView!
     
     let viewModel = GamesViewModel(networkingService: NetworkClient())
-    
+    var isDeviceLandscape = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         gamesCollectionView.dataSource = self
         gamesCollectionView.delegate = self
+        
+        if UIDevice.current.orientation.isPortrait {
+            isDeviceLandscape = false
+        } else {
+            isDeviceLandscape = true
+        }
         
         setupViewModel()
     }
@@ -29,19 +35,8 @@ class FavouritesViewController: UIViewController {
         viewModel.getFavoriteGames()
     }
     
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
-            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.scrollDirection = .horizontal
-            }
-        } else {
-            if let layout = gamesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.scrollDirection = .vertical
-            }
-        }
-    }
+    
+    
     
     private func setupViewModel() {
         
