@@ -15,6 +15,7 @@ final class GamesViewModel {
     var didFetchGameDetails: ((Results) -> Void)?
     var didUpdateFavourite: (() -> Void)?
     var didUpdateViewedGames: (() -> Void)?
+    var didChangeSearchQuery: (() -> Void)?
     
     
     private(set) var games: [Results] = [Results]() {
@@ -23,18 +24,28 @@ final class GamesViewModel {
         }
     }
     
+    private(set) var searchResults: [Results] = [Results]() {
+        didSet {
+            didFetchGames?()
+        }
+    }
+    
     private(set) var viewedGames: [Int] = []
     private(set) var favouriteGames: [Results] = []
     
+    var isLoadingMore = false
+    var isSearchActive = false
+    var currentQuery = ""
+    
     /*
-     MARK: fetchedGames to retain fetched results when user cancells search fetchedGames will be used
+     MARK: fetchedGames to retain fetched results when user cancells search, fetchedGames will be used
      */
     private(set) var fetchedGames: [Results] = [Results]()
     
     
     private var currentSearchNetworkTask: URLSessionDataTask?
     private var lastQuery: String?
-    private var currentPage = 1
+    var currentPage = 1
     private var pageSize = 10
     // Dependencies
     private let networkingService: NetworkingService
@@ -44,13 +55,23 @@ final class GamesViewModel {
     }
     
     // Inputs
-    func ready() {
+    func startFetchingGames() {
         isRefreshing?(true)
-        
+        self.isSearchActive = false
         networkingService.fetchGames(withQuery: "?page_size=\(pageSize)&page=\(currentPage)") { [weak self] games in
             guard let strongSelf  = self else { return }
-            strongSelf.fetchedGames = games?.results ?? []
-            strongSelf.finishFetching(with: games?.results ?? [])
+            if strongSelf.games.count > 0 {
+                guard let results = games?.results else {
+                    return
+                }
+                let updatedGames = strongSelf.games + results
+                strongSelf.finishFetching(with: updatedGames)
+                strongSelf.isLoadingMore = false
+            } else {
+                strongSelf.fetchedGames = games?.results ?? []
+                strongSelf.finishFetching(with: games?.results ?? [])
+            }
+            
         }
     }
     
@@ -68,17 +89,28 @@ final class GamesViewModel {
         didSelecteGame?(id)
     }
     
-    func searchGames(_ searchString: String) {
-        isRefreshing?(true)
+    func searchGames(_ searchString: String, shouldReset: Bool) {
+        
         if searchString != "" && searchString.count > 3 {
-            startSearchWithQuery(searchString)
+            self.isSearchActive = true
+            currentQuery = searchString
+            if shouldReset {
+                resetCurrentPage()
+            }
             
-        } else {
-            isRefreshing?(false)
-            self.games = self.fetchedGames
-            didFetchGames?()
+            startSearchWithQuery(searchString, shouldReset: shouldReset)
+            
         }
         
+    }
+    
+    func finishSearching() {
+        
+        isRefreshing?(false)
+        isSearchActive = false
+        resetCurrentPage()
+        isLoadingMore = false
+        games = fetchedGames
     }
     
     func fetchGameDetails(_ id: Int) {
@@ -197,21 +229,41 @@ final class GamesViewModel {
     }
     
     // Private
-    private func startSearchWithQuery(_ query: String) {
+    private func startSearchWithQuery(_ query: String, shouldReset: Bool) {
         currentSearchNetworkTask?.cancel() // cancel previous pending request
         
         isRefreshing?(true)
-        
-        
         currentSearchNetworkTask = networkingService.fetchGames(withQuery: "?page_size=\(pageSize)&page=\(currentPage)&search=\(query)") { [weak self] games in
             guard let strongSelf  = self else { return }
-            strongSelf.finishFetching(with: games?.results ?? [])
+            if shouldReset {
+                strongSelf.didChangeSearchQuery?()
+                strongSelf.finishFetching(with: games?.results ?? [])
+                
+                
+            } else {
+                guard let results = games?.results else {
+                    return
+                }
+                let updatedGames = strongSelf.searchResults + results
+                strongSelf.finishFetching(with: updatedGames)
+                strongSelf.isLoadingMore = false
+            }
+            
         }
     }
     
     private func finishFetching(with games: [Results]) {
         isRefreshing?(false)
-        self.games = games
+        if self.isSearchActive {
+            searchResults = games
+        } else {
+            self.games = games
+        }
+        
+    }
+    
+    private func resetCurrentPage() {
+        currentPage = 1
     }
     
     

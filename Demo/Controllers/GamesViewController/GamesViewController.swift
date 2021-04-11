@@ -20,8 +20,8 @@ class GamesViewController: UIViewController {
         super.viewDidLoad()
         gamesCollectionView.dataSource = self
         gamesCollectionView.delegate = self
-        self.searchBar.delegate = self
-        self.loadingIndicator.isHidden = true
+        searchBar.delegate = self
+        loadingIndicator.isHidden = true
         
         setupViewModel()
         
@@ -29,7 +29,8 @@ class GamesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.searchBar.text = ""
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
         viewModel.getViewedGames()
         
     }
@@ -51,7 +52,7 @@ class GamesViewController: UIViewController {
         
         viewModel.didUpdateViewedGames = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.viewModel.ready()
+            strongSelf.viewModel.startFetchingGames()
         }
         
         viewModel.isRefreshing = { loading in
@@ -78,87 +79,15 @@ class GamesViewController: UIViewController {
             strongSelf.navigationController?.pushViewController(detailsVc, animated: true)
             
         }
-    }
-    
-}
-
-extension GamesViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return viewModel.games.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
-        let cell: GameCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionViewCell", for: indexPath) as! GameCollectionViewCell
-        //        @IBOutlet weak var containerView: UIView!
-        cell.gameTitleLabel.text = viewModel.games[indexPath.item].name
-        cell.metaCriticsLabel.text = "\(viewModel.games[indexPath.item].metacritic ?? 0)"
-        if let url: URL = URL(string: viewModel.games[indexPath.item].backgroundImage ?? "") {
-            cell.gameImageView.loadImageWithUrl(url)
-        }
-        
-        
-        
-        if let genres = viewModel.games[indexPath.item].genres {
-            cell.genreLabel.text = genres.map { ($0.name ?? "") }.joined(separator: ", ")
-        }
-        
-        if let id = viewModel.games[indexPath.item].id  {
-            if viewModel.viewedGames.contains(id) {
-                cell.containerView.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
-            } else {
-                cell.containerView.backgroundColor = .white
+        viewModel.didChangeSearchQuery = {
+            DispatchQueue.main.async {
+                self.gamesCollectionView.setContentOffset(.zero, animated: true)
+                self.gamesCollectionView.reloadData()
+                
             }
-         
+            
         }
-        
-        return cell
-        
     }
-    
-    
-}
-
-extension GamesViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.didSelectRow(at: indexPath)
-    }
-    
-    
-}
-
-extension GamesViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let orientation = UIApplication.shared.statusBarOrientation
-        if orientation == .landscapeLeft {
-            return CGSize(width: collectionView.frame.width / 2, height: 136)
-        }
-        return CGSize(width: collectionView.frame.width, height: 136)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    
-}
-
-extension GamesViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchGames(searchBar.text ?? "")
-        
-    }
-    
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        viewModel.searchGames("")
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
     
 }

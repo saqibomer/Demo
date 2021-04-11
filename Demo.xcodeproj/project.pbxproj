@@ -58,6 +58,7 @@
 		AAE2E9B2261F0D1E0058EE13 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9B1261F0D1E0058EE13 /* Requirement.swift */; };
 		AAE2E9BA261F12B70058EE13 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2E9B8261F12B70058EE13 /* GameCollectionViewCell.swift */; };
 		AAE691B4261F1F8A00CDB366 /* UIImageView+Exntensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE691B3261F1F8A00CDB366 /* UIImageView+Exntensions.swift */; };
+		AAF13C922621C56A00BD529C /* GamesViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF13C912621C56A00BD529C /* GamesViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		AAE2E9B1261F0D1E0058EE13 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		AAE2E9B8261F12B70058EE13 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		AAE691B3261F1F8A00CDB366 /* UIImageView+Exntensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Exntensions.swift"; sourceTree = "<group>"; };
+		AAF13C912621C56A00BD529C /* GamesViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GamesViewController+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 			children = (
 				AAE2E9B7261F129B0058EE13 /* GameCollectionViewCell */,
 				AAE2E9A9261EFAAC0058EE13 /* GamesViewController.swift */,
+				AAF13C912621C56A00BD529C /* GamesViewController+Extensions.swift */,
 			);
 			path = GamesViewController;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA52C118261FB4AC00892EB3 /* FavouritesViewController.swift in Sources */,
+				AAF13C922621C56A00BD529C /* GamesViewController+Extensions.swift in Sources */,
 				AAE2E929261EDBD30058EE13 /* Ratings.swift in Sources */,
 				AA8B3C282621914000682831 /* FavouritesViewController+CollectionView.swift in Sources */,
 				AAE2E92A261EDBD30058EE13 /* Genres.swift in Sources */,
