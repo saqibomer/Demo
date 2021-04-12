@@ -1,5 +1,5 @@
-# iOS Assignment la3eb
-iOS interview app for la3eb.
+# iOS Demo
+
 
 Table of Contents
 
@@ -78,6 +78,6 @@ I have used Xcode unit testing to test decoding of models. In order to test hit 
 ## 5.0 Comments
 
 In order to improve app I have following suggestions
-* Search api is searching in real time but due to network requests it is not fast enough. I recommend using [link to meiliseach!](http://meilisearch.com). It is open source and provides a good user experience. 
+* Search api is searching in real time but due to network requests it is not fast enough. I recommend using [MeiliSearch](http://meilisearch.com). It is open source and provides a good user experience. 
 * App should provide multi language
 * SwiftUI is not mature enough to use in a production environment at the moment but app should be converted to SwiftUI to take leverage of `Combine` framework. 
