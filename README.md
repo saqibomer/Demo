@@ -3,12 +3,12 @@ iOS interview app for la3eb.
 
 Table of Contents
 
-1.0 Problem Statement
-2.0 Solution
-3.0 Implementation
-4.0 Testing
-5.0 Comments
-6.0 Recommendations
+1. Problem Statement
+2. Solution
+3. Implementation
+4. Testing
+5. Comments
+
 
 
 ## 1.0 Problem Statement
@@ -59,9 +59,25 @@ Classes contains documentation of all methods and properties. Methods will show 
 
 I have used Tabbar along with navigation controllers. For Games and favourite lists ```UICollectionView```  is used to cater dual coulmn mode on landscape mode. Implementaion was divided into four main layers
 
-1: Controllers: 
- 
-      
+1. View Controllers: 
+ Interacts with view models and manages views
+ 2. View Models:
+ Fetches data from network and input or output data to and from views via controllers
+3. Models: 
+Contains business logic
+
+## 4.0 Implementation
+
+I have used Xcode unit testing to test decoding of models. In order to test hit diamond icon on `DemoTests.swift`. It contains three unit tests
+
+1. Test for games api response
+2. Test for game detail api
+3. Test for search api
 
 
-suggestions:Multilanguage
+## 5.0 Comments
+
+In order to improve app I have following suggestions
+* Search api is searching in real time but due to network requests it is not fast enough. I recommend using [link to meiliseach!](http://meilisearch.com). It is open source and provides a good user experience. 
+* App should provide multi language
+* SwiftUI is not mature enough to use in a production environment at the moment but app should be converted to SwiftUI to take leverage of `Combine` framework. 
