@@ -12,41 +12,80 @@ import XCTest
 class DemoTests: XCTestCase {
     
     let viewModel = GamesViewModel(networkingService: NetworkClient() as NetworkingService)
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDownWithError() throws {
         
-        viewModel.didFetchGames = { [weak self] in
-            guard let strongSelf = self else { return }
-            
-            if strongSelf.viewModel.games.count > 0 {
-//                XCTAssertTrue()
+        
+    }
+    /**
+     MARK: - Decoding Tests
+     */
+    
+    // MARK: - Validation of decoding of `GamesResponse` object
+    func testgamesApiEndPointDecoding() throws {
+        /// When the Data initializer or parsing of GamesResponse object fails it is throwing an error, the test will fail.
+        viewModel.startFetchingGames()
+        let expectation = XCTestExpectation.init(description: "Should parse games response.")
+        let urlString = "https://api.rawg.io/api/games?page_size=10&page=1"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+            DispatchQueue.main.async {
+                guard let data = data,
+                      let _ = try? JSONDecoder().decode(GamesResponse.self, from: data) else {
+                    XCTFail("Fail")
+                        return
+                }
+                expectation.fulfill()
             }
         }
-    }
-
-    func testGamesFetch() throws {
-        
-        viewModel.startFetchingGames()
-        
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        task.resume()
     }
     
-    func testDecoding() throws {
-        /// When the Data initializer is throwing an error, the test will fail.
-        let jsonData = try Data(contentsOf: URL(string: "https://api.rawg.io/api/games?page_size=10&page=1")!)
-
-        /// The `XCTAssertNoThrow` can be used to get extra context about the throw
-        XCTAssertNoThrow(try JSONDecoder().decode(GamesResponse.self, from: jsonData))
+    // MARK: - Validation of decoding of `Results` (Game details) object
+    func testgameDetailsApiEndPointDecoding() throws {
+        /// When the Data initializer or parsing of Resulsts object fails it is throwing an error, the test will fail.
+        viewModel.startFetchingGames()
+        let expectation = XCTestExpectation.init(description: "Should parse game details reponse.")
+        let urlString = "https://api.rawg.io/api/games/3498"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+            DispatchQueue.main.async {
+                guard let data = data,
+                      let _ = try? JSONDecoder().decode(Results.self, from: data) else {
+                    XCTFail("Fail")
+                        return
+                }
+                expectation.fulfill()
+            }
+        }
+        task.resume()
     }
-
+    
+    // MARK: - Validation of decoding of search results (`GamesResponse Object`) object
+    func testSearchApiEndPointDecoding() throws {
+        /// When the Data initializer or parsing of GamesResponse object fails it is throwing an error, the test will fail.
+        viewModel.startFetchingGames()
+        let expectation = XCTestExpectation.init(description: "Should parse game details reponse.")
+        let urlString = "https://api.rawg.io/api/games?page_size=10&page=1&search=gtav"
+        let request = URLRequest(url: URL(string: urlString)!)
+        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+            DispatchQueue.main.async {
+                guard let data = data,
+                      let _ = try? JSONDecoder().decode(Results.self, from: data) else {
+                    XCTFail("Fail")
+                        return
+                }
+                expectation.fulfill()
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
+    
 }
