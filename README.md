@@ -66,7 +66,7 @@ I have used Tabbar along with navigation controllers. For Games and favourite li
 3. Models: 
 Contains business logic
 
-## 4.0 Implementation
+## 4.0 Testing
 
 I have used Xcode unit testing to test decoding of models. In order to test hit diamond icon on `DemoTests.swift`. It contains three unit tests
 
