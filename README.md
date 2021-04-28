@@ -53,7 +53,7 @@ App has three environments to help and maintain development life cyle. Environme
                 
 
 ##### Classes documentation: 
-Classes contains documentation of all methods and properties. Methods will show auto complete with 
+Classes contains documentation of all methods and properties. Methods will show auto complete. 
       
 ## 3.0 Implementation
 
